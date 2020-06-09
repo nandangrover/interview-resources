@@ -106,6 +106,7 @@ In the above example, function inner is never called but keeps a reference to el
 `SOLUTION`: The problem in this case occurs because the reference to function(){} is kept alive. There will be no javascript memory leak if the outer function is actually called(Call the outer function in line 15 like newElem = outer()();). A small isolated javascript memory leak resulting from closures might not need any attention. However a periodic leak repeating and growing with each iteration can seriously damage the performance of your code.
 
 ### 4. Where closure variables are stored?
+
 A closure is just an evolution of the concept of the stack.
 
 The stack is used to separate/isolate scope when functions are called. When a function returns the stack frame (activation record) is popped off the call stack thus freeing the used memory allowing the next function call to reuse that RAM for its stack frame.
@@ -116,3 +117,16 @@ Most languages implement this by implementing the stack as a linked list or hash
 
 So. With this in mind, the answer is that variables in a closure are stored in the stack and heap. Depending on your point of view.
 From the point of view of the language, it's definitely the stack. Since that's what closures are in theory - a modified stack.
+
+### 5. What is functional programming?
+
+Functional programming (often abbreviated FP) is the process of building software by composing `pure functions`, `avoiding shared state`, `mutable data`, and `side-effects`. Functional programming is declarative rather than imperative, and application state flows through `pure functions`. Contrast with object oriented programming, where application state is usually shared and colocated with methods in objects.
+
+Functional programming is a programming paradigm, meaning that it is a way of thinking about software construction based on some fundamental, defining principles (listed above). Other examples of programming paradigms include object oriented programming and procedural programming.
+
+Examples of functional programming includes: 
+.map()
+.filter()
+.reduce()
+
+To know more check out this [blog](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)
