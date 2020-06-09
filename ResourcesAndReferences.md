@@ -12,3 +12,6 @@
 
 ### Node js interview questions
 - http://blog.vigowebs.com/post/nodejs-interview-questions-part-1
+
+### Node basics
+https://www.freecodecamp.org/news/node-js-what-when-where-why-how-ab8424886e2/
