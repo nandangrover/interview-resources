@@ -5,17 +5,17 @@
 <h3 align="center"> Interview Resources </h3>
 
 # Node
-https://github.com/nandangrover/interview-resources/blob/master/nodejs.md
+https://github.com/nandangrover/interview-resources/blob/master/NODEJS.md
 
 # Javascript
-https://github.com/nandangrover/interview-resources/blob/master/javascript.md
+https://github.com/nandangrover/interview-resources/blob/master/JAVASCRIPT.md
 
 # React
-https://github.com/nandangrover/interview-resources/blob/master/reactjs.md
+https://github.com/nandangrover/interview-resources/blob/master/REACTJS.md
 
 # CSS
-https://github.com/nandangrover/interview-resources/blob/master/css.md
+https://github.com/nandangrover/interview-resources/blob/master/CSS.md
 
 # References and Resources
-https://github.com/nandangrover/interview-resources/blob/master/resourcesLink.md
+https://github.com/nandangrover/interview-resources/blob/master/ResourcesAndReferences.md
 
