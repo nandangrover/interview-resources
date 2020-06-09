@@ -16,6 +16,12 @@ https://github.com/nandangrover/interview-resources/blob/master/REACTJS.md
 # CSS
 https://github.com/nandangrover/interview-resources/blob/master/CSS.md
 
+# MongoDB
+https://github.com/nandangrover/interview-resources/blob/master/MONGODB.md
+
+# SQL
+https://github.com/nandangrover/interview-resources/blob/master/SQL.md
+
 # References and Resources
 https://github.com/nandangrover/interview-resources/blob/master/ResourcesAndReferences.md
 
