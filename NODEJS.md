@@ -59,7 +59,7 @@ Asynchronous literally means not synchronous. We are making HTTP requests which 
 The term Non-Blocking is widely used with IO. For example non-blocking read/write calls return with whatever they can do and expect caller to execute the call again. Read will wait until it has some data and put calling thread to sleep.
 
 ```js
-/ Blocking
+// Blocking
 const fs = require('fs');
 const data = fs.readFileSync('/file.md'); // blocks here until file is read
 console.log(data);
@@ -119,7 +119,7 @@ process.nextTick(fn("FOUR"));
 Output:
 
 ```
-ext TICK ONE, 
+Next TICK ONE, 
 Next TICK TWO, 
 Next TICK THREE, 
 Next TICK FOUR, 
