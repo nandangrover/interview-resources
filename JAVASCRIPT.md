@@ -79,7 +79,7 @@ alert( curriedSum(1)(2) ); // 3
 ```
 A curried function is a function that takes multiple arguments one at a time. Given a function with 3 parameters, the curried version will take one argument and return a function that takes the next argument, which returns a function that takes the third argument.
 
-### 3. Memory leaks in closures? Where closure variable are stored?
+### 3. Memory leaks in closures?
 
 A memory leak occurs in a closure if a variable is declared in outer function becomes automatically available to the nested inner function and continues to reside in memory even if it is not being used/referenced in the nested function.
 
@@ -104,3 +104,14 @@ A memory leak occurs in a closure if a variable is declared in outer function be
 In the above example, function inner is never called but keeps a reference to elem. But as all inner functions in a closure share the same context, inner(line 7) shares the same context as function(){} (line 12)which is returned by outer function. Now in every 5ms we make a function call to outer and assign its new value(after each call) to newElem which is a global variable. As long a reference is pointing to this function(){}, the shared scope/context is preserved and someText is kept because it is part of the inner function even if inner function is never called. Each time we call outer we save the previous function(){} in elem of the new function. Therefore again the previous shared scope/context has to be kept. So in the nth call of outer function, someText of the (n-1)th call of outer cannot be garbage collected. This process continues until your system runs out of memory eventually.
 
 `SOLUTION`: The problem in this case occurs because the reference to function(){} is kept alive. There will be no javascript memory leak if the outer function is actually called(Call the outer function in line 15 like newElem = outer()();). A small isolated javascript memory leak resulting from closures might not need any attention. However a periodic leak repeating and growing with each iteration can seriously damage the performance of your code.
+
+### 4. Where closure variables are stored?
+A closure is just an evolution of the concept of the stack.
+
+The stack is used to separate/isolate scope when functions are called. When a function returns the stack frame (activation record) is popped off the call stack thus freeing the used memory allowing the next function call to reuse that RAM for its stack frame.
+
+What a closure does is that instead of actually freeing that stack frame, if there's any object/variable in that stack frame that's referenced by anything else then it keeps that stack frame for future use.
+
+Most languages implement this by implementing the stack as a linked list or hash table instead of a flat array. That way, the stack can be re-ordered at runtime and is not constrained by physical memory layout.
+
+So. With this in mind, the answer is that variables in a closure are stored in the stack and heap. Depending on your point of view.
