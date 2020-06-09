@@ -52,3 +52,79 @@ In Node.js however, declaring any variable outside of any function’s scope bin
 We will get more or less same execution speed when we wrap the above code in function.
 **References:** [1](https://stackoverflow.com/questions/29387950/performance-of-google-chrome-vs-nodejs-v8), [2](https://stackoverflow.com/questions/39904835/why-is-node-js-runtime-slower-than-google-chrome-console/39904955)
 
+### 6. What is the difference between Asynchronous and Non-blocking?
+
+Asynchronous literally means not synchronous. We are making HTTP requests which are asynchronous, means we are not waiting for the server response. We continue with other block and respond to the server response when we received.
+
+The term Non-Blocking is widely used with IO. For example non-blocking read/write calls return with whatever they can do and expect caller to execute the call again. Read will wait until it has some data and put calling thread to sleep.
+
+```js
+/ Blocking
+const fs = require('fs');
+const data = fs.readFileSync('/file.md'); // blocks here until file is read
+console.log(data);
+moreWork(); // will run after console.log
+
+// Non-blocking
+const fs = require('fs');
+fs.readFile('/file.md', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+moreWork(); // will run before console.log
+```
+### 7. Difference between setImmediate() vs setTimeout()?
+
+`setImmediate()` and `setTimeout()` are similar, but behave in different ways depending on when they are called.
+
+- `setImmediate()` is designed to execute a script once the current poll (event loop) phase completes.
+- `setTimeout()` schedules a script to be run after a minimum threshold in ms has elapsed.
+
+The order in which the timers are executed will vary depending on the context in which they are called. If both are called from within the main module, then timing will be bound by the performance of the process.
+
+### 8. What is process.nextTick()?
+
+`setImmediate()` and `setTimeout()` are based on the event loop. But `process.nextTick()` technically not part of the event loop. Instead, the `nextTickQueue` will be processed after the current operation completes, regardless of the current phase of the event loop.
+
+Thus, any time you call `process.nextTick()` in a given phase, all callbacks passed to `process.nextTick()` will be resolved before the event loop continues.
+
+Basically, `process.nextTick()` has the highest priority and will be executed first. Ex:
+
+Input:
+
+```js
+function fn(name){
+   return f;
+
+   function f(){
+       var n = name;
+       console.log("Next TICK "+n+", ");
+   }
+}
+
+function myTimeout(time,msg){
+   setTimeout(function(){
+       console.log("TIMEOUT "+msg);
+   },time);
+}
+
+process.nextTick(fn("ONE"));
+myTimeout(0,"AFTER-ONE");// set timeout to execute in 0 seconds for all
+process.nextTick(fn("TWO"));
+myTimeout(0,"AFTER-TWO");
+process.nextTick(fn("THREE"));
+myTimeout(0,"AFTER-THREE");
+process.nextTick(fn("FOUR"));
+```
+Output:
+
+```
+ext TICK ONE, 
+Next TICK TWO, 
+Next TICK THREE, 
+Next TICK FOUR, 
+TIMEOUT AFTER-ONE
+TIMEOUT AFTER-TWO
+TIMEOUT AFTER-THREE
+```
+When you use process.nextTick you basically ensure that the function that you pass as a parameter will be called immediately in the next tick ie. start of next event loop. So that's why all your function in next tick executes before your timer ie. setTimeout next tick doesn't mean next second it means next loop of the nodejs eventloop. Also next tick ensures that the function you are trying to call is executed asynchronously. And next tick has higher priority than your timers, I/O operations etc queued in the eventloop for execution. You should use nextTick when you want to ensure that your code is executed in next event loop instead of after a specified time. nextTick is more efficient than timers and when you want to ensure the function you call is executed asynchronously . 
