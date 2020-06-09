@@ -115,3 +115,4 @@ What a closure does is that instead of actually freeing that stack frame, if the
 Most languages implement this by implementing the stack as a linked list or hash table instead of a flat array. That way, the stack can be re-ordered at runtime and is not constrained by physical memory layout.
 
 So. With this in mind, the answer is that variables in a closure are stored in the stack and heap. Depending on your point of view.
+From the point of view of the language, it's definitely the stack. Since that's what closures are in theory - a modified stack.
