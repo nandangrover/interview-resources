@@ -1,6 +1,6 @@
 # Questions
 
-1. Write poly-fill of Object.create and explain why it worked:
+### 1. Write poly-fill of Object.create and explain why it worked:
 
 ```js
 if( typeof Object.create !== "function") {
@@ -36,7 +36,7 @@ var bob = Object.create(userB, {
 });
 ```
 
-2. Implement curry function
+### 2. Implement curry function
 
 ```js
 var temp = curry(avg, 1, 2, 3);
@@ -78,3 +78,29 @@ let curriedSum = curry(sum);
 alert( curriedSum(1)(2) ); // 3
 ```
 A curried function is a function that takes multiple arguments one at a time. Given a function with 3 parameters, the curried version will take one argument and return a function that takes the next argument, which returns a function that takes the third argument.
+
+### 3. Memory leaks in closures? Where closure variable are stored?
+
+A memory leak occurs in a closure if a variable is declared in outer function becomes automatically available to the nested inner function and continues to reside in memory even if it is not being used/referenced in the nested function.
+
+```js
+ var newElem;
+ 
+ function outer() {
+     var someText = new Array(1000000);
+     var elem = newElem;
+ 
+      function inner() {
+         if (elem) return someText;
+      }
+ 
+      return function () {};
+  }
+ 
+  setInterval(function () {
+      newElem = outer();
+  }, 5);
+```
+In the above example, function inner is never called but keeps a reference to elem. But as all inner functions in a closure share the same context, inner(line 7) shares the same context as function(){} (line 12)which is returned by outer function. Now in every 5ms we make a function call to outer and assign its new value(after each call) to newElem which is a global variable. As long a reference is pointing to this function(){}, the shared scope/context is preserved and someText is kept because it is part of the inner function even if inner function is never called. Each time we call outer we save the previous function(){} in elem of the new function. Therefore again the previous shared scope/context has to be kept. So in the nth call of outer function, someText of the (n-1)th call of outer cannot be garbage collected. This process continues until your system runs out of memory eventually.
+
+`SOLUTION`: The problem in this case occurs because the reference to function(){} is kept alive. There will be no javascript memory leak if the outer function is actually called(Call the outer function in line 15 like newElem = outer()();). A small isolated javascript memory leak resulting from closures might not need any attention. However a periodic leak repeating and growing with each iteration can seriously damage the performance of your code.
