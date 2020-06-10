@@ -190,3 +190,17 @@ if (cluster.isMaster) {
 }
 ```
 Reference to learn more about clusters: [Node docs](https://node.readthedocs.io/en/latest/api/cluster/#:~:text=A%20single%20instance%20of%20Node,that%20all%20share%20server%20ports.)
+
+### 11. How can we avoid Callback Hell in Node.js?
+
+Callback hell refers to heavily nested callbacks that have become unreadable and hard to debug. We can use async module.
+
+Async is a utility module which provides straight-forward, powerful functions for working with asynchronous JavaScript. Consider we have two functions which runs sequentially:
+
+```js
+async.waterfall([firstFunction, secondFunction], function() {
+  console.log('done')
+});
+```
+
+We can also use Promise, async/await to prevent callback hell.
