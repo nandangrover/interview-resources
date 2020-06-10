@@ -189,6 +189,14 @@ if (cluster.isMaster) {
   }).listen(8000);
 }
 ```
+Output
+```
+23521,Master Worker 23524 online
+23521,Master Worker 23526 online
+23521,Master Worker 23523 online
+23521,Master Worker 23528 online
+```
+
 Reference to learn more about clusters: [Node docs](https://node.readthedocs.io/en/latest/api/cluster/#:~:text=A%20single%20instance%20of%20Node,that%20all%20share%20server%20ports.)
 
 ### 11. How can we avoid Callback Hell in Node.js?
