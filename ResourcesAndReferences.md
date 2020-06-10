@@ -15,3 +15,6 @@
 
 ### Node basics
 - https://www.freecodecamp.org/news/node-js-what-when-where-why-how-ab8424886e2/
+
+### Implementing security in Node
+- https://medium.com/@nodepractices/were-under-attack-23-node-js-security-best-practices-e33c146cb87d
