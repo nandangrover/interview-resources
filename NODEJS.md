@@ -128,3 +128,65 @@ TIMEOUT AFTER-TWO
 TIMEOUT AFTER-THREE
 ```
 When you use process.nextTick you basically ensure that the function that you pass as a parameter will be called immediately in the next tick ie. start of next event loop. So that's why all your function in next tick executes before your timer ie. setTimeout next tick doesn't mean next second it means next loop of the nodejs eventloop. Also next tick ensures that the function you are trying to call is executed asynchronously. And next tick has higher priority than your timers, I/O operations etc queued in the eventloop for execution. You should use nextTick when you want to ensure that your code is executed in next event loop instead of after a specified time. nextTick is more efficient than timers and when you want to ensure the function you call is executed asynchronously . 
+
+### 9.  What is Streams in Node.js?
+
+Streams are pipes that let you easily read data from a source and pipe it to a destination. Simply put, a stream is nothing but an EventEmitter and implements some specials methods. Depending on the methods implemented, a stream becomes Readable, Writable, or Duplex (both readable and writable).
+
+For example, if we want to read data from a file, the best way to do it from a stream is to listen to data event and attach a callback. When a chunk of data is available, the readable stream emits a data event and your callback executes. Take a look at the following snippet:
+
+```js
+var fs = require('fs');
+var readableStream = fs.createReadStream('textFile.txt');
+var fileData = '';
+
+readableStream.on('data', function(chunk) {
+  data += chunk;
+});
+
+readableStream.on('end', function() {
+  console.log(data);
+});
+```
+
+### 10. What is Child Process and Cluster? What are the difference?
+
+Child Process in Node.js is used to run a child process under Node.js. There are two methods to do that: exec and spawn. The example for exec is:
+```js
+var exec = require('child_process').exec;
+exec('node -v', function(error, stdout, stderr) {
+  console.log('stdout: ' + stdout);
+  console.log('stderr: ' + stderr);
+  if (error !== null) {
+    console.log('exec error: ' + error);
+}
+});
+```
+`Cluster` is used to split a single process into multiple processes or workers, in Node.js terminology. This can be achieved through a cluster module. The cluster module allows you to create child processes (workers), which share all the server ports with the main Node process (master).
+
+A cluster is a pool of similar workers running under a parent Node process. Workers are spawned using the fork() method of the child_processes module. Cluster is multiple processes to scale on multi cores.
+
+```js
+var cluster = require('cluster');
+var http = require('http');
+var numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+  // Fork workers.
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', function(worker, code, signal) {
+    console.log('worker ' + worker.process.pid + ' died');
+  });
+} else {
+  // Workers can share any TCP connection
+  // In this case its a HTTP server
+  http.createServer(function(req, res) {
+    res.writeHead(200);
+    res.end("hello world\n");
+  }).listen(8000);
+}
+```
+Reference to learn more about clusters: [Node docs](https://node.readthedocs.io/en/latest/api/cluster/#:~:text=A%20single%20instance%20of%20Node,that%20all%20share%20server%20ports.)
