@@ -12,6 +12,7 @@
 
 ### Node js interview questions
 - http://blog.vigowebs.com/post/nodejs-interview-questions-part-1
+- https://medium.com/platformer-blog/node-js-concurrency-with-async-await-and-promises-b4c4ae8f4510
 
 ### Node basics
 - https://www.freecodecamp.org/news/node-js-what-when-where-why-how-ab8424886e2/
