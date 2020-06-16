@@ -212,3 +212,11 @@ async.waterfall([firstFunction, secondFunction], function() {
 ```
 
 We can also use Promise, async/await to prevent callback hell.
+
+### 12. Concurrency vs Parallelism?
+
+Concurrency in very simple terms means that two or more processes (or threads) run together, but not at the same time. Only one process executes at once.
+
+Parallelism on the other hand means that the processes (or threads) run in parallel (surprise surprise); meaning they start at the same time and execute alongside each other at the same time.
+
+Now you’re probably thinking, what’s better? Well the thing is, they both work and different programming paradigms and languages support different models (and sometimes even both!) — And the choice really boils down to your specific application requirements. Regardless, Node.JS only supports an ‘Asynchronous event-driven’ programming paradigm (i.e. Concurrency) and that’s all you’ll ever need to write highly efficient Node applications.
