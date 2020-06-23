@@ -15,4 +15,4 @@
 |-----------|-----------|
 |Used to serve as a unique identifier for each row in a table.|Uniquely determines a row which isn’t primary key.|
 |Does not allow null value|Allow null value|
-|A table can contain only one primary key|A table can have multiple foreign keys|
+|A table can contain only one primary key|A table can have multiple unique keys|
