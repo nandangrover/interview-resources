@@ -22,3 +22,4 @@
 
 ### React interview questions
 - https://www.fullstack.cafe/blog/react-js-interview-questions
+- [React Hooks for beginners](https://www.valentinog.com/blog/hooks/)
