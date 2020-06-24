@@ -130,3 +130,21 @@ Examples of functional programming includes:
 .reduce()
 
 To know more check out this [blog](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)
+
+###6. Why is JS called single threaded?
+
+Javascript is a single threaded language. This means it has one call stack and one memory heap. As expected, it executes code in order and must finish executing a piece code before moving onto the next. It's synchronous, but at times that can be harmful. For example, if a function takes awhile to execute or has to wait on something, it freezes everything up in the meanwhile.
+
+```js
+console.log("first")
+setTimeout(() => {
+    console.log("second")
+}, 1000)
+console.log("third")
+```
+Output:
+```
+first
+third
+second
+```
