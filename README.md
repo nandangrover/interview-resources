@@ -10,6 +10,9 @@ https://github.com/nandangrover/interview-resources/blob/master/NODEJS.md
 # Javascript
 https://github.com/nandangrover/interview-resources/blob/master/JAVASCRIPT.md
 
+# Coding Problems
+https://github.com/nandangrover/interview-resources/blob/master/CodingProblems.md
+
 # React
 https://github.com/nandangrover/interview-resources/blob/master/REACTJS.md
 
