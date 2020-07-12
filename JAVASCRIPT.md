@@ -148,3 +148,39 @@ first
 third
 second // After one second
 ```
+
+### 7. Polyfill for bind: prerequisite to understand below code(call, apply, bind, closure, prototype, rest & spread operator)
+```js
+let name = {
+  firstname: "Amit",
+  lastname: "Mondal"
+}
+
+let name2 = {
+  firstname: "Nandan",
+  lastname: "Gorver"
+}
+
+let printName = function (hometown, state, country) {
+  console.log(`${this.firstname} ${this.lastname}, ${hometown}, ${state}, ${country}`);
+}
+
+// Bind polyfill (let's call it mybind)
+Function.prototype.mybind = function(...args){
+  // Store `printName` in obj and later pass the context and parameters
+  let obj = this,
+    params = args.slice(1);
+  
+  // Returning a function as bind returns a function and doesn't call it
+  return function (...args2) {
+    obj.apply(args[0], [...params, ...args2]);
+  }
+}
+
+// Testing above code:
+let printMyName = printName.mybind(name, "Maharashtra", "Mumbai");
+printMyName( "India");
+
+let printMyName2 = printName.mybind(name2, "Maharashtra", "Navi Mumbai");
+printMyName2( "India");
+```
