@@ -35,3 +35,20 @@ body { margin: 20px 30px }
 /* top=10px, right=20px, bottom=30px, left=20px */
 body { margin: 10px 20px 30px }
 ```
+
+### 2. Display multiple divs side by side:
+
+Div are **block** elements by nature, which means by default they sit one below the other. We can achieve this either by `inline-block` or `flex-direction`:
+- Using `inline-block`: give style to all the divs as
+```css
+.side-by-side {
+  display: inline-block;
+}
+```
+- Using `flex-direction`: give style only to the parent div as
+```css
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+}
+```
