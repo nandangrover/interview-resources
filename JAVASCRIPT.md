@@ -1,6 +1,18 @@
 # Javascript Questions and Explanations
 
-### 1. Write poly-fill of Object.create and explain why it worked:
+### Table of Contents
+
+| No. | Questions |
+| --- | --------- |
+|1  | [Write poly-fill of Object.create and explain why it worked:](#1) |
+|2  | [Implement curry function](#2) |
+|3  | [Memory leaks in closures?](#3) |
+|4  | [Where closure variables are stored?](#4) |
+|5  | [What is functional programming?](#5) |
+|6  | [Why is JS called single threaded?](#6) |
+|7  | [Polyfill for bind: prerequisite to understand below code(call, apply, bind, closure, prototype, rest & spread operator)](#7) |
+
+### <a name="1">1.</a> Write poly-fill of Object.create and explain why it worked:
 
 ```js
 if( typeof Object.create !== "function") {
@@ -35,8 +47,9 @@ var bob = Object.create(userB, {
   }
 });
 ```
+ **[⬆ Back to Top](#table-of-contents)**
 
-### 2. Implement curry function
+### <a name="2">2.</a> ### Implement curry function
 
 ```js
 var temp = curry(avg, 1, 2, 3);
@@ -79,7 +92,9 @@ alert( curriedSum(1)(2) ); // 3
 ```
 A curried function is a function that takes multiple arguments one at a time. Given a function with 3 parameters, the curried version will take one argument and return a function that takes the next argument, which returns a function that takes the third argument.
 
-### 3. Memory leaks in closures?
+ **[⬆ Back to Top](#table-of-contents)**
+
+### <a name="3">3.</a> Memory leaks in closures?
 
 A memory leak occurs in a closure if a variable is declared in outer function becomes automatically available to the nested inner function and continues to reside in memory even if it is not being used/referenced in the nested function.
 
@@ -105,7 +120,9 @@ In the above example, function inner is never called but keeps a reference to el
 
 `SOLUTION`: The problem in this case occurs because the reference to function(){} is kept alive. There will be no javascript memory leak if the outer function is actually called(Call the outer function in line 15 like newElem = outer()();). A small isolated javascript memory leak resulting from closures might not need any attention. However a periodic leak repeating and growing with each iteration can seriously damage the performance of your code.
 
-### 4. Where closure variables are stored?
+ **[⬆ Back to Top](#table-of-contents)**
+
+### <a name="4">4.</a> Where closure variables are stored?
 
 A closure is just an evolution of the concept of the stack.
 
@@ -118,7 +135,7 @@ Most languages implement this by implementing the stack as a linked list or hash
 So. With this in mind, the answer is that variables in a closure are stored in the stack and heap. Depending on your point of view.
 From the point of view of the language, it's definitely the stack. Since that's what closures are in theory - a modified stack.
 
-### 5. What is functional programming?
+### <a name="5">5.</a> What is functional programming?
 
 Functional programming (often abbreviated FP) is the process of building software by composing `pure functions`, `avoiding shared state`, `mutable data`, and `side-effects`. Functional programming is declarative rather than imperative, and application state flows through `pure functions`. Contrast with object oriented programming, where application state is usually shared and colocated with methods in objects.
 
@@ -131,7 +148,9 @@ Examples of functional programming includes:
 
 To know more check out this [blog](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)
 
-### 6. Why is JS called single threaded?
+ **[⬆ Back to Top](#table-of-contents)**
+
+### <a name="6">6.</a> Why is JS called single threaded?
 
 Javascript is a single threaded language. This means it has one call stack and one memory heap. As expected, it executes code in order and must finish executing a piece code before moving onto the next. It's synchronous, but at times that can be harmful. For example, if a function takes awhile to execute or has to wait on something, it freezes everything up in the meanwhile.
 
@@ -149,7 +168,9 @@ third
 second // After one second
 ```
 
-### 7. Polyfill for bind: prerequisite to understand below code(call, apply, bind, closure, prototype, rest & spread operator)
+ **[⬆ Back to Top](#table-of-contents)**
+
+### <a name="7">7.</a> Polyfill for bind: prerequisite to understand below code(call, apply, bind, closure, prototype, rest & spread operator)
 ```js
 let name = {
   firstname: "Amit",
@@ -184,3 +205,4 @@ printMyName( "India");
 let printMyName2 = printName.mybind(name2, "Maharashtra", "Navi Mumbai");
 printMyName2( "India");
 ```
+ **[⬆ Back to Top](#table-of-contents)**
