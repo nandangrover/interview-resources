@@ -49,7 +49,7 @@ var bob = Object.create(userB, {
 ```
  **[⬆ Back to Top](#table-of-contents)**
 
-### <a name="2">2.</a> ### Implement curry function
+### <a name="2">2.</a> Implement curry function
 
 ```js
 var temp = curry(avg, 1, 2, 3);
